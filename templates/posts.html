@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>{{ blog_title }}</h2>
+    {% if session["email"] == blog_author%}
+        <a href="/posts/new/{{ blog_id }}"><button class="btn btn-primary">New post</button></a>
+    {% endif %}
+    {% if posts|length > 0 %}
+        {% for post in posts %}
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.content }}</p>
+            <p>{{ post.author }}</p>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <h4>There aren't any posts yet!</h4>
+        <hr>
+    {% endif %}
+        <a href="/blogs/{{ blog_author_id }}"><button class="btn btn-primary me-2">{{ blog_author }}'s blogs</button></a><a href="/"><button class="btn btn-primary">Home</button></a>
+</div>
+{% endblock %}

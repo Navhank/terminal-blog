@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-3">
+    <h1 class="display-5 fw-bold">Terminal Blogs</h1>
+    <p class="lead">Amazing blogs written by awesome people. You can check the content from the authors bellow.</p>
+    <p class="lead">Sign up to contribute with your blog!</p>
+    {% if session["email"] == None %}
+        <a href="{{ url_for('register_template') }}" class="btn btn-primary me-2">Sign up</a><a href="{{ url_for('login_template') }}" class="btn btn-primary">Log in</a>
+    {% else %}
+        <a href="{{ url_for('logout') }}" class="btn btn-primary me-2">Log out</a>
+    {% endif %}
+    <hr class="my-4">
+    <p>
+    {% for user in users %}
+        <h4><a href="/blogs/{{ user._id }}">{{ user.email }}</a></h4>
+    {% endfor %}
+    <hr></p>
+</div>
+{% endblock %}
